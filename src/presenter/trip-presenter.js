@@ -40,7 +40,8 @@ export default class TripPresenter {
       offer,
       destination,
       point,
-      onEditClick);
+      onEditClick,
+    );
 
     function swithToEditWayPoint() {
       replace(wayPoint, eventEditView);
@@ -54,4 +55,5 @@ export default class TripPresenter {
 
     render(wayPoint, this.container);
   }
+
 }

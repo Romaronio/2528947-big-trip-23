@@ -1,7 +1,11 @@
 import PointModel from './model/point_model.js';
 import Presenter from './presenter/presenter.js';
+import HeaderPresenter from './presenter/header-presenter.js';
 const siteMainElement = document.querySelector('.trip-events');
+const HeaderElement = document.querySelector('.trip-main');
 const pointModel = new PointModel();
 pointModel.init();
+const header = new HeaderPresenter({container: HeaderElement, pointModel});
+header.init();
 const presenter = new Presenter({container: siteMainElement, pointModel});
 presenter.init();

@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view';
-import normalDate from '../utils';
+import normalDate from '../utils/day';
 function wayPoint(point, destination, offer, offers) {
   const {isFavorite} = point;
   const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
