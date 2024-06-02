@@ -6,9 +6,9 @@ const CreateEventTypeList = (off) =>
 <input id="event-type-${off.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value=${off.type}>
 <label class="event__type-label  event__type-label--${off.type}" for="event-type-${off.type}-1">${off.type}</label>
 </div>`;
-function editWayPoint(offers, offer, destination, point) {
-  const currentPoint = point.find((poi) => poi.type === offer.type);
-  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
+function editWayPoint(offers,points, destination, point) {
+  const currentPoint = points.find((poi) => poi.type === offers[0].type);
+  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[0].id);
   const mapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">
@@ -63,15 +63,15 @@ function editWayPoint(offers, offer, destination, point) {
 }
 export default class EditWayPoints extends AbstractView {
   #offers = null;
-  #offer = null;
+  #points = null;
   #destination = null;
   #point = null;
   #button = null;
   #butClick = null;
-  constructor(offers, offer, destination, point, onEditClick) {
+  constructor(offers, points, destination, point, onEditClick) {
     super();
     this.#offers = offers;
-    this.#offer = offer;
+    this.#points = points;
     this.#destination = destination;
     this.#point = point;
     this.#butClick = onEditClick;
@@ -80,7 +80,7 @@ export default class EditWayPoints extends AbstractView {
   }
 
   get template() {
-    return editWayPoint(this.#offers, this.#offer, this.#destination, this.#point);
+    return editWayPoint(this.#offers, this.#points, this.#destination, this.#point);
   }
 
   #onClick = (evt) => {

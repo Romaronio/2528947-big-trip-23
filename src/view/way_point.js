@@ -1,9 +1,9 @@
 import AbstractView from '../framework/view/abstract-view';
-import normalDate from '../utils';
-function wayPoint(point, destination, offer, offers) {
+import normalDate from '../utils/utils';
+function wayPoint(point, points, destination, offers) {
   const {isFavorite} = point;
-  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
-  const currentPoint = point.find((poi) => poi.type === offer.type);
+  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[0].id);
+  const currentPoint = points.find((poi) => poi.type === offers[0].type);
   const currentOffers = offers.find((off) => off.type === currentPoint.type);
   const startDate = normalDate(currentPoint.dateFrom);
   const endDate = normalDate(currentPoint.dateTo);
@@ -66,27 +66,33 @@ function wayPoint(point, destination, offer, offers) {
 export default class WayPoint extends AbstractView {
   #destination = null;
   #point = null;
-  #offer = null;
   #offers = null;
   #butClick = null;
   #button = null;
-  constructor(point, destination, offer, offers, onEditCli) {
+  #points = null;
+  constructor(point, points, destination, offers, onEditClick, favoriteClick) {
     super();
     this.#point = point;
+    this.#points = points;
     this.#destination = destination;
-    this.#offer = offer;
     this.#offers = offers;
-    this.#butClick = onEditCli;
+    this.favoriteClick = favoriteClick;
+    this.#butClick = onEditClick;
     this.#button = this.element.querySelector('.event__rollup-btn');
     this.#button.addEventListener('click', this.#onClick);
+    this.favorite = this.element.querySelector('.event__favorite-btn').addEventListener('click', this.favoriteClick);
   }
 
   get template() {
-    return wayPoint(this.#point, this.#destination, this.#offer, this.#offers);
+    return wayPoint(this.#point, this.#points, this.#destination, this.#offers);
   }
 
   #onClick = (evt) => {
     evt.preventDefault();
     this.#butClick();
+  };
+
+  favoriteCli = () => {
+    this.favoriteClick();
   };
 }
