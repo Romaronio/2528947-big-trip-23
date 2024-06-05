@@ -80,7 +80,7 @@ export default class WayPoint extends AbstractView {
     this.#butClick = onEditClick;
     this.#button = this.element.querySelector('.event__rollup-btn');
     this.#button.addEventListener('click', this.#onClick);
-    this.favorite = this.element.querySelector('.event__favorite-btn').addEventListener('click', this.favoriteClick);
+    // this.favorite = this.element.querySelector('.event__favorite-btn').addEventListener('click', this.favoriteClick);
   }
 
   get template() {

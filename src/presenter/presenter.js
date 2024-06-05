@@ -46,7 +46,7 @@ export default class Presenter {
   };
 
   onEditClose = () => {
-    this.pointMap.forEach((presenter) => presenter.SetView());
+    this.pointMap.forEach((presenter) => presenter.setView());
   };
 }
 
