@@ -9,11 +9,12 @@ export default class TripPresenter {
   #Mode = mode.simple;
   wayPoint = null;
   eventEditView = null;
+  #point = null;
   #onEditClose = null;
   constructor({container, pointModel, point, pointUpdate, onEditClose}) {
     this.#container = container;
     this.#pointModel = pointModel;
-    this.point = point;
+    this.#point = point;
     this.pointUpdate = pointUpdate;
     this.#onEditClose = onEditClose;
   }
@@ -28,7 +29,7 @@ export default class TripPresenter {
     const onFormWayPoint = () => this.switchToEditWayPoint();
 
     this.wayPoint = new WayPoint(
-      this.point,
+      this.#point,
       points,
       destination,
       offers,
@@ -45,7 +46,7 @@ export default class TripPresenter {
       offers,
       points,
       destination,
-      this.point,
+      this.#point,
       onEditClick,
       {
         favoriteClick:() => {

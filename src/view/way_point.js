@@ -2,9 +2,9 @@ import AbstractView from '../framework/view/abstract-view';
 import normalDate from '../utils/utils';
 function wayPoint(point, points, destination, offers) {
   const {isFavorite} = point;
-  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[0].id);
+  const currentDestination = destination.find((des) => des.id === point.id);
   const currentPoint = points.find((poi) => poi.type === offers[0].type);
-  const currentOffers = offers.find((off) => off.type === currentPoint.type);
+  const currentOffers = offers.find((off) => off.type === point.type);
   const startDate = normalDate(currentPoint.dateFrom);
   const endDate = normalDate(currentPoint.dateTo);
   return `<li class="trip-events__item">
@@ -33,7 +33,7 @@ function wayPoint(point, points, destination, offers) {
 			<p class="event__duration">01H 10M</p>
 		</div>
 		<p class="event__price">
-			&euro;&nbsp;<span class="event__price-value">${currentPoint.basePrice}</span>
+			&euro;&nbsp;<span class="event__price-value">${point.basePrice}</span>
 		</p>
 		<h4 class="visually-hidden">Offers:</h4>
 		<ul class="event__selected-offers">
@@ -70,7 +70,7 @@ export default class WayPoint extends AbstractView {
   #butClick = null;
   #button = null;
   #points = null;
-  constructor(point, points, destination, offers, onEditClick, favoriteClick) {
+  constructor(point, points, destination, offers, onEditClick,favoriteClick) {
     super();
     this.#point = point;
     this.#points = points;
