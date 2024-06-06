@@ -1,17 +1,19 @@
 import { render } from '../framework/render.js';
-import { updateDate, updateItem } from '../utils/is-favorite.js';
+import { updateDate } from '../utils/is-favorite.js';
 import Filter from '../view/Filter.js';
 import DrawPoint from '../view/draw_point.js';
 import TripPresenter from './trip-presenter.js';
 export default class Presenter {
   boardComponent = new DrawPoint();
   pointMap = new Map();
+  points = [];
   constructor({container, pointModel}) {
     this.container = container;
     this.pointModel = pointModel;
   }
 
   init() {
+    this.ponts = this.pointModel.getPoints();
     this.#renderBoardComponent();
     this.#renderFilter();
     this.#renderTrip();
@@ -27,7 +29,7 @@ export default class Presenter {
 
   #renderTrip() {
     for(const point of this.pointModel.getPoints()) {
-      const TripPres = new TripPresenter(
+      const tripPres = new TripPresenter(
         {
           container: this.container,
           pointModel: this.pointModel,
@@ -35,13 +37,13 @@ export default class Presenter {
           pointUpdate: this.#pointUpdate,
           onEditClose: this.onEditClose
         });
-      TripPres.init();
-      this.pointMap.set(point.id, TripPres);
+      tripPres.init();
+      this.pointMap.set(point.id, tripPres);
     }
   }
 
-  #pointUpdate = () => {
-    this.point = updateDate(this.point, updateItem);
+  #pointUpdate = (updateItem) => {
+    this.points = updateDate(this.points, updateItem);
     this.pointMap.get(updateItem.id).init(updateItem);
   };
 

@@ -7,6 +7,7 @@ export default class TripPresenter {
   #container = null;
   #pointModel = null;
   #Mode = mode.simple;
+  #pointUpdate = null;
   wayPoint = null;
   eventEditView = null;
   #point = null;
@@ -15,11 +16,11 @@ export default class TripPresenter {
     this.#container = container;
     this.#pointModel = pointModel;
     this.#point = point;
-    this.pointUpdate = pointUpdate;
+    this.#pointUpdate = pointUpdate;
     this.#onEditClose = onEditClose;
   }
 
-  init(point) {
+  init() {
     const WayComponent = this.wayPoint;
     const EditComponent = this.eventEditView;
     const offers = this.#pointModel.getOffers();
@@ -36,8 +37,8 @@ export default class TripPresenter {
       onFormWayPoint,
       {
         favoriteClick:() => {
-          const updatePoint = updateItem(offers, {isFavorite: !point.isFavorite});
-          this.pointUpdate(updatePoint);
+          const updatePoint = updateItem(this.#point, {isFavorite: !this.#point.isFavorite});
+          this.#pointUpdate(updatePoint);
         }
       }
     );
@@ -50,8 +51,8 @@ export default class TripPresenter {
       onEditClick,
       {
         favoriteClick:() => {
-          const updatePoint = updateItem(offers, {isFavorite: !point.isFavorite});
-          this.pointUpdate(updatePoint);
+          const updatePoint = updateItem(this.#point, {isFavorite: !this.#point.isFavorite});
+          this.#pointUpdate(updatePoint);
         }
       }
     );

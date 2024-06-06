@@ -7,6 +7,7 @@ const CreateEventTypeList = (off) =>
 <label class="event__type-label  event__type-label--${off.type}" for="event-type-${off.type}-1">${off.type}</label>
 </div>`;
 function editWayPoint(offers,points, destination, point) {
+  const {isFavorite} = point;
   const currentPoint = points.find((poi) => poi.type === offers[0].type);
   const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[0].id);
   const mapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
@@ -46,6 +47,19 @@ function editWayPoint(offers,points, destination, point) {
 
 					<button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
 					<button class="event__reset-btn" type="reset">${point.id ? 'Delete' : 'Cansel'}</button>
+          <button class="event__favorite-btn${isFavorite ? 'event__favorite-btn--active' : ''}" type="button">
+			<span class="visually-hidden">Add to favorite</span>
+			<svg
+				class="event__favorite-icon"
+				width="28"
+				height="28"
+				viewBox="0 0 28 28"
+			>
+				<path
+					d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z"
+				/>
+			</svg>
+		</button>
 				</header>
 				${new ClassOffers(offers, currentPoint).template}
 				<section class="event__details">
@@ -77,6 +91,7 @@ export default class EditWayPoints extends AbstractView {
     this.#butClick = onEditClick;
     this.#button = this.element.querySelector('.event__rollup-btn');
     this.#button.addEventListener('click', this.#onClick);
+    // this.favorite = this.element.querySelector('.event__favorite-btn').addEventListener('click', this.favoriteCli);
   }
 
   get template() {
@@ -86,5 +101,9 @@ export default class EditWayPoints extends AbstractView {
   #onClick = (evt) => {
     evt.preventDefault();
     this.#butClick();
+  };
+
+  favoriteCli = () => {
+    this.favoriteClick();
   };
 }
