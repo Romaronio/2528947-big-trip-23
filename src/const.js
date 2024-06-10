@@ -9,3 +9,7 @@ export const getDefoltPoint = () => ([{
   type: POINT_TYPES[1],
 }]);
 
+export const mode = {
+  edit: 'edit',
+  simple: 'simple'
+};
