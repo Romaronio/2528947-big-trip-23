@@ -31,8 +31,8 @@ export default class TripPresenter {
 
     this.wayPoint = new WayPoint(
       this.#point,
-      points,
       destination,
+      points,
       offers,
       onFormWayPoint,
       {

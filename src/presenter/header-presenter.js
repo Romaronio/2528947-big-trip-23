@@ -1,12 +1,12 @@
 import Header from '../view/Header';
 import { render } from '../framework/render';
 export default class HeaderPresenter {
-  constructor({boardContainer}) {
-    this.boardContainer = boardContainer;
+  constructor({headerContainer}) {
+    this.headerContainer = headerContainer;
   }
 
   #renderHeader () {
-    render(new Header(), this.boardContainer);
+    render(new Header(), this.headerContainer);
   }
 
   init() {

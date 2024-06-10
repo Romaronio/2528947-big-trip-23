@@ -2,11 +2,10 @@ import AbstractView from '../framework/view/abstract-view';
 import normalDate from '../utils/utils';
 function wayPoint(point, destination, points, offers) {
   const {isFavorite} = points;
-  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[1].id);
-  const currentPoint = points.find((poi) => poi.type === point.type);
-  const currentOffers = offers.find((off) => off.type === currentPoint.type);
-  const startDate = normalDate(currentPoint.dateFrom);
-  const endDate = normalDate(currentPoint.dateTo);
+  const currentDestination = destination.find((des) => des.id === point.id);
+  const currentOffers = offers.find((off) => off.type === point.type);
+  const startDate = normalDate(point.dateFrom);
+  const endDate = normalDate(point.dateTo);
   return `<li class="trip-events__item">
 	<div class="event">
 		<time class="event__date" datetime="2019-03-18">MAR 18</time>
@@ -33,7 +32,7 @@ function wayPoint(point, destination, points, offers) {
 			<p class="event__duration">01H 10M</p>
 		</div>
 		<p class="event__price">
-			&euro;&nbsp;<span class="event__price-value">${currentPoint.basePrice}</span>
+			&euro;&nbsp;<span class="event__price-value">${point.basePrice}</span>
 		</p>
 		<h4 class="visually-hidden">Offers:</h4>
 		<ul class="event__selected-offers">

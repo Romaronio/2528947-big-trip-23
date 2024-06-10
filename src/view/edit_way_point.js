@@ -7,7 +7,7 @@ const CreateEventTypeList = (off) =>
 <label class="event__type-label  event__type-label--${off.type}" for="event-type-${off.type}-1">${off.type}</label>
 </div>`;
 function editWayPoint(offers, points, destination, point) {
-  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[1].id);
+  const currentDestination = destination.find((des) => des.id === point.id);
   const currentPoint = points.find((poi) => poi.type === point.type);
   const mapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
