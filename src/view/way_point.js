@@ -1,9 +1,9 @@
 import AbstractView from '../framework/view/abstract-view';
 import normalDate from '../utils';
-function wayPoint(point, destination, offer, offers) {
-  const {isFavorite} = point;
-  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
-  const currentPoint = point.find((poi) => poi.type === offer.type);
+function wayPoint(point, destination, points, offers) {
+  const {isFavorite} = points;
+  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[1].id);
+  const currentPoint = points.find((poi) => poi.type === point.type);
   const currentOffers = offers.find((off) => off.type === currentPoint.type);
   const startDate = normalDate(currentPoint.dateFrom);
   const endDate = normalDate(currentPoint.dateTo);
@@ -66,15 +66,15 @@ function wayPoint(point, destination, offer, offers) {
 export default class WayPoint extends AbstractView {
   #destination = null;
   #point = null;
-  #offer = null;
+  #points = null;
   #offers = null;
   #butClick = null;
   #button = null;
-  constructor(point, destination, offer, offers, onEditCli) {
+  constructor(point, destination, points, offers, onEditCli) {
     super();
     this.#point = point;
     this.#destination = destination;
-    this.#offer = offer;
+    this.#points = points;
     this.#offers = offers;
     this.#butClick = onEditCli;
     this.#button = this.element.querySelector('.event__rollup-btn');
@@ -82,7 +82,7 @@ export default class WayPoint extends AbstractView {
   }
 
   get template() {
-    return wayPoint(this.#point, this.#destination, this.#offer, this.#offers);
+    return wayPoint(this.#point, this.#destination, this.#points, this.#offers);
   }
 
   #onClick = (evt) => {

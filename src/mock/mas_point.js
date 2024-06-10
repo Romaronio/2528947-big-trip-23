@@ -34,5 +34,5 @@ export const Points = [
       'b4c3e4e6-9053-42ce-b747-e281314baa33'
     ],
     type: 'bus'
-  }
+  },
 ];

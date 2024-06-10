@@ -6,9 +6,9 @@ const CreateEventTypeList = (off) =>
 <input id="event-type-${off.type}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value=${off.type}>
 <label class="event__type-label  event__type-label--${off.type}" for="event-type-${off.type}-1">${off.type}</label>
 </div>`;
-function editWayPoint(offers, offer, destination, point) {
-  const currentPoint = point.find((poi) => poi.type === offer.type);
-  const currentDestination = destination.find((des) => des.id === offer.ObjOffers[0].id);
+function editWayPoint(offers, points, destination, point) {
+  const currentDestination = destination.find((des) => des.id === offers[0].ObjOffers[1].id);
+  const currentPoint = points.find((poi) => poi.type === point.type);
   const mapEventTypeList = offers.map((off)=> CreateEventTypeList(off)).join('');
   const BoxPoint = destination.map((des)=> CreateBoxPoint(des)).join('');
   return `<section class="trip-events">

@@ -8,16 +8,17 @@ export default class TripPresenter {
   }
 
   init() {
+    const points = this.pointModel.getPoints();
+    this.#renderEvents(points);
+  }
+
+  #renderEvents(points) {
+    points.forEach((point) => this.#renderEvent(point));
+  }
+
+  #renderEvent(point) {
+    const points = this.pointModel.getPoints();
     const offers = this.pointModel.getOffers();
-    this.#renderEvents(offers);
-  }
-
-  #renderEvents(offers) {
-    offers.forEach((offer) => this.#renderEvent(offer, offers));
-  }
-
-  #renderEvent(offer, offers) {
-    const point = this.pointModel.getPoints();
     const destination = this.pointModel.getDestination();
     const onEditClick = () => swithToEditWayPoint();
     const onFormWayPoint = () => switchToWayPoint();
@@ -31,13 +32,13 @@ export default class TripPresenter {
     const wayPoint = new WayPoint(
       point,
       destination,
-      offer,
+      points,
       offers,
       onFormWayPoint
     );
     const eventEditView = new EditWayPoints(
       offers,
-      offer,
+      points,
       destination,
       point,
       onEditClick);
